@@ -1,13 +1,13 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { create, changeInput } from "../store/reducers/todos";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { create } from "../store/reducers/todos";
 
 function Header() {
   const dispatch = useDispatch();
-  const { input } = useSelector((state) => state.todos);
+  const [input, setInput] = useState("");
   const onChange = (e) => {
     const { value } = e.currentTarget;
-    dispatch(changeInput(value));
+    setInput(value);
   };
   return (
     <>
@@ -17,6 +17,7 @@ function Header() {
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(create(input));
+          setInput("");
         }}
       >
         <input onChange={onChange} value={input} />
