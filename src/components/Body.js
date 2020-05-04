@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TodoItem from "./TodoItem";
 import { remove, toggle } from "../store/reducers/todos";
@@ -12,6 +12,10 @@ function Body() {
   const onRemove = (id) => {
     dispatch(remove(id));
   };
+
+  const memo = useMemo(() => {
+    console.log("Body");
+  }, []);
   return (
     <>
       {console.log("Body")}
@@ -20,6 +24,7 @@ function Body() {
           todo ? (
             <TodoItem
               key={todo.id}
+              id={todo.id}
               done={todo.done}
               onToggle={() => onToggle(todo.id)}
               onRemove={() => onRemove(todo.id)}
